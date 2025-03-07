@@ -30,7 +30,7 @@ To run this project, ensure you have the following installed:
 
 ## 🛠️ Project Structure
 This project follows the Page Object Model (POM) design pattern for maintainability. Here's an overview of the project structure:
-    ```bash
+    
     src/
     ├── config/
     │   └── Config.ts          # Configuration and singleton for project settings
@@ -48,19 +48,19 @@ This project follows the Page Object Model (POM) design pattern for maintainabil
 
 ### Running the Tests
 To run the tests, use the following command:
-    ```bash
+   ```bash
     npx playwright test
+   ```
 This will run all the tests located in the tests/ folder.
 
 ### Running a Specific Test File
-You can run a specific test file by using the -g flag followed by the name of the test file:
-    ```bash
+You can run a specific test file:
+    
     npx playwright test tests/login.test.ts
 
 ### Running in Headless Mode
 By default, tests run in headless mode. If you'd like to watch the browser actions, you can disable headless mode by modifying the playwright.config.ts file or passing the --headed flag:
-    ```bash
+    
     npx playwright test --headed
-
 
 
