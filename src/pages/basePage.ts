@@ -24,13 +24,26 @@ export class BasePage {
     await element.click();
   }
 
-  async assertElementText(element: string, expectedText: string) {
-      const locator = this.getLocator(element);
+  async fillField(element: string, text: string) {
+    await this.page.fill(element, text)
+  }
+
+  async assertElementText(element: string, expectedText: string, contains: boolean = false) {
+    const locator = this.getLocator(element);
+    if (contains) {
+      await expect(locator).toContainText(expectedText);
+    } else {
       await expect(locator).toHaveText(expectedText);
+    }
   }
 
   async assertUrl(page: Page, expectedUrl: string) {
-      await expect(page).toHaveURL(expectedUrl);
+    await expect(page).toHaveURL(expectedUrl);
+  }
+
+  async assertElementVisible(element: string) { 
+    const locator = this.getLocator(element);
+    await expect(locator).toBeVisible();
   }
 
 }
