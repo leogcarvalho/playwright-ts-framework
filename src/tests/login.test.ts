@@ -13,13 +13,11 @@ test('Successful log in', async ({ page }) => {
     await loginPage.login('user1', 'pass1');
 
     // Assert Home screen is displayed
-    await homePage.assertHomeUrl();
-    await homePage.assertHomeTitle();
+    await homePage.assertHomeScreen('5.000,00')
 });
 
 test('Log in with invalid credentials', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    const homePage = new HomePage(page);
 
     // Open application
     await loginPage.goTo();

@@ -12,9 +12,9 @@ export class LoginPage extends BasePage{
   }
 
   async login(username: string, password: string) {
-    await this.page.fill(this.usernameField, username);
-    await this.page.fill(this.passwordField, password);
-    await this.page.click(this.loginButton);
+    await this.fillField(this.usernameField, username);
+    await this.fillField(this.passwordField, password);
+    await this.clickElement(this.loginButton)
   }
 
   async assertInvalidCredentialsError() {
