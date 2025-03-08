@@ -11,11 +11,11 @@ export class HomePage extends BasePage{
     private exitBtn = 'a[href="login.html"]'; 
 
     constructor(page: Page) {
-    super(page);
+        super(page);
     }
 
     async assertHomeUrl() {
-        await this.assertUrl(this.page, this.config.homePageUrl);
+        await this.assertUrl(this.config.homePageUrl);
     }    
 
     async assertHomeTitle() {

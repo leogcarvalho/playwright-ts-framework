@@ -21,8 +21,15 @@ export class BasePage {
 
   async clickElement(selector: string) {
     const element = this.getLocator(selector);
+    await element.waitFor({ state: 'visible' });
     await element.click();
   }
+
+  async clickByText(text: string) {
+    const element = this.page.locator(`text=${text}`);
+    await element.waitFor({ state: 'visible' });
+    await element.click();
+  }  
 
   async fillField(element: string, text: string) {
     await this.page.fill(element, text)
@@ -37,13 +44,12 @@ export class BasePage {
     }
   }
 
-  async assertUrl(page: Page, expectedUrl: string) {
-    await expect(page).toHaveURL(expectedUrl);
+  async assertUrl(expectedUrl: string) {
+    await expect(this.page).toHaveURL(expectedUrl);
   }
 
   async assertElementVisible(element: string) { 
     const locator = this.getLocator(element);
     await expect(locator).toBeVisible();
   }
-
 }
