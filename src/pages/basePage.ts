@@ -4,10 +4,10 @@ import { Texts } from '../helpers/texts';
 import { Assertions } from '../helpers/assertionsHelper';
 
 export class BasePage {
-  config = Config.getInstance();
-  texts = Texts.getInstance();
+  config = new Config();
+  texts = new Texts();
   assertions = new Assertions();
-
+  
   protected page: Page;
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +16,5 @@ export class BasePage {
   async goTo(url: string = this.config.baseURL) {
     await this.page.goto(url);
   }
-
 
 }
