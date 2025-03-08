@@ -5,6 +5,7 @@ export class LoginPage extends BasePage{
   private usernameField = '#username';
   private passwordField = '#password';
   private loginButton = '//*[@type="submit"]';
+  private invalidCredentialsError = '#error-message';
 
   constructor(page: Page) {
     super(page);
@@ -14,5 +15,9 @@ export class LoginPage extends BasePage{
     await this.page.fill(this.usernameField, username);
     await this.page.fill(this.passwordField, password);
     await this.page.click(this.loginButton);
+  }
+
+  async assertInvalidCredentialsError() {
+    await this.assertElementText(this.invalidCredentialsError, this.texts.invalidCredentialsErrorText)
   }
 }
