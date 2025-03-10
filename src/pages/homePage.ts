@@ -19,6 +19,7 @@ export class HomePage extends BasePage{
     }    
 
     async assertHomeTitle() {
+        await this.waitForElementVisible(this.title)
         await this.assertElementText(this.title, this.texts.homeTitleText);
     }
 
@@ -27,7 +28,6 @@ export class HomePage extends BasePage{
     }
 
     async assertHomeScreen(expectedBalance: string) { 
-        await this.assertHomeUrl();
         await this.assertHomeTitle();
         await this.assertCurrentBalance(expectedBalance);
         await this.assertElementVisible(this.viewStatementBtn);
@@ -35,5 +35,6 @@ export class HomePage extends BasePage{
         await this.assertElementVisible(this.payBillsBtn);
         await this.assertElementVisible(this.loansBtn);
         await this.assertElementVisible(this.exitBtn);
+        await this.assertHomeUrl();
     }
 }
