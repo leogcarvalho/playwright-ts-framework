@@ -15,17 +15,19 @@ export class SuccessPage extends BasePage{
     }  
 
     async assertSuccessTitleAndSubtitle() {
+        await this.waitForElementVisible(this.title)
+        await this.waitForElementVisible(this.subtitle)
         await this.assertElementText(this.title, this.texts.successPageTitle);
         await this.assertElementText(this.subtitle, this.texts.successPageSubtitle);
     }
 
     async assertSuccessScreen() { 
-        await this.assertSuccessUrl();
         await this.assertSuccessTitleAndSubtitle();
         await this.assertElementVisible(this.backHomeBtn);
+        await this.assertSuccessUrl();
     }
 
     async clickBackToHome() {
-        await this.clickElement(this.backHomeBtn)
+        await this.clickElement(this.backHomeBtn, true, true)
     }
 }

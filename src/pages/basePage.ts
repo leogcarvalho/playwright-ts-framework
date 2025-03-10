@@ -19,15 +19,35 @@ export class BasePage {
     return this.page.locator(selector);
   }
 
-  async clickElement(selector: string) {
+  async waitForElementVisible(elementOrSelector: string | Locator, timeout: number = 5000): Promise<void> {
+    const element = typeof elementOrSelector === "string" 
+      ? this.getLocator(elementOrSelector) 
+      : elementOrSelector;
+    await element.waitFor({ state: "visible", timeout });
+  }
+
+  async clickElement(selector: string, waitDisappear: boolean = false, retry: boolean = false, timeout: number = 3000) {
     const element = this.getLocator(selector);
-    await element.waitFor({ state: 'visible' });
+    await this.waitForElementVisible(element);
     await element.click();
+    if (waitDisappear) {
+      try {
+          await element.waitFor({ state: 'detached', timeout });
+      } catch (error) {
+          if (retry) {
+              console.warn("Element did not disappear, retrying click...");
+              await element.click();
+              await element.waitFor({ state: 'detached', timeout });
+          } else {
+              throw new Error("Element did not disappear within the timeout.");
+          }
+      }
+  }
   }
 
   async clickByText(text: string) {
     const element = this.page.locator(`text=${text}`);
-    await element.waitFor({ state: 'visible' });
+    await this.waitForElementVisible(element);
     await element.click();
   }  
 
