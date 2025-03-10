@@ -23,7 +23,7 @@ test.describe('Login Tests', () => {
         });
     }
 
-    // ✅ Test for invalid login scenario
+    // Test for invalid login scenario
     test('Log in with invalid credentials', async ({ page }) => {
         const loginPage = new LoginPage(page);
 
